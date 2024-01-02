@@ -1,19 +1,15 @@
 from flask_sqlalchemy import SQLAlchemy
-from chatgpt import app
 
-
+# Initialize the SQLAlchemy object without binding it to a specific Flask application
 db = SQLAlchemy()
 
 
 
 
+def create_tables(app):
+    with app.app_context():
+        db.create_all()
 
-
-
-## DATABASE
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///chatbot_db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
 
 
 
@@ -26,10 +22,6 @@ class ExtractedData(db.Model):
     def __repr__(self):
         return f'<ExtractedData {self.source}>'
 
-@app.before_first_request
-def create_tables():
-    db.create_all()
-
 def store_data(source, content):
     new_data = ExtractedData(source=source, content=content)
     db.session.add(new_data)
@@ -39,5 +31,3 @@ def query_data(keyword):
     search = f"%{keyword}%"
     results = ExtractedData.query.filter(ExtractedData.content.like(search)).all()
     return results
-
-

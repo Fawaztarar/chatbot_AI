@@ -1,7 +1,8 @@
 ## Chatbot for makers.tech
 
-openAI chatgpt3 free tier integration
-Chatbot data from data files PDF, text
+openAI chatgpt3 free tier integration.
+
+Chatbot data from data files PDF and text
 chatbot data extraction from makers.tech
 
 
@@ -24,9 +25,8 @@ chatbot data extraction from makers.tech
 
 3. pip install flask
 
-4. pip install beautifulsoup4
+4. pip install psycopg2
 
-    pip install requests beautifulsoup4
 
 
 5. pip install PyPDF2
