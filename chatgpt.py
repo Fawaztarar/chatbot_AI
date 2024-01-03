@@ -29,26 +29,29 @@ def chatbot():
     return render_template('ai_chatbot.html')
 
 
+
+
 @app.route('/query', methods=['POST'])
 def handle_query():
     data = request.get_json()
     query = data['query']
 
-    # Updated API usage
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",  # or another model of your choice
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": query}
-        ]
-    )
-    
-    # Extracting and returning the response
-    if response and "choices" in response and len(response["choices"]) > 0:
-        answer = response["choices"][0].get("message", {}).get("content", "")
-        return jsonify({'response': answer})
-    else:
-        return jsonify({'response': 'No response from the model'}), 400
+    try:
+        response = openai.Completion.create(
+            model="text-davinci-003",
+            prompt=f"Q: {query}\nA:",
+            max_tokens=150
+        )
+        if response:
+            answer = response.choices[0].text.strip() if response.choices else 'No response'
+            return jsonify({'response': answer})
+        else:
+            return jsonify({'response': 'No response from the model'}), 400
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+
 
 @app.route('/test_error')
 def test_error():

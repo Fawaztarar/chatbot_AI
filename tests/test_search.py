@@ -1,6 +1,6 @@
 # test_search.py
 import pytest
-from your_flask_app import simple_search
+from lib.search import simple_search
 
 # Mock data
 mock_data = {

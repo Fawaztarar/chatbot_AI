@@ -3,6 +3,8 @@ import pytest
 from lib.db_models import create_app, db
 from lib.db_models import ExtractedData
 from lib.db_models import store_data, query_data
+from chatgpt import create_app
+
 
 @pytest.fixture
 def test_app():

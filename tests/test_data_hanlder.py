@@ -1,5 +1,6 @@
 import pytest
-from your_module import read_file, read_pdf_combined, read_pdf_with_pdfplumber, read_text_file_sync
+from lib.data_handler import read_file, read_pdf_combined, read_pdf_with_pdfplumber, read_text_file_sync
+
 import os
 
 # Directory where test files are located

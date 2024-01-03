@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maker's Assistant</title>
+    <title>Makers AI Assistant</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -79,7 +79,7 @@
 <body>
     <div id="chat-container">
         <div id="chat-title">
-            <h3>Maker's Assistant</h3>
+            <h3>Makers AI Assistant</h3>
         </div>
         <div id="chat-history">
             <!-- Chat history will go here -->
@@ -103,7 +103,7 @@
                     body: JSON.stringify({ query: message, chat_history: [] })
                 })
                 .then(response => response.json())
-                .then(data => addMessageToHistory('Maker\'s Assistant', data.answer, 'chat-message'))
+                .then(data => addMessageToHistory('Maker\'s AI Assistant', data.answer, 'chat-message'))
                 .catch(error => console.error('Error:', error));
                 input.value = '';
             }
