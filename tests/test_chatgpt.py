@@ -20,11 +20,12 @@ def test_chatbot_route(client):
 
 
 def test_handle_query(client):
-    sample_query = "What is the capital of France?"
-    response = client.post('/query', json={'query': sample_query})
-    response_data = response.data.decode('utf-8')  # Decode the response data
-    print(response_data)
+    # Simulate a POST request to the endpoint
+    response = client.post('/query', json={'query': 'What is the capital of France?'})
+    
+    # Check the response status code and body
     assert response.status_code == 200
+    assert 'response' in response.json
 
 
 

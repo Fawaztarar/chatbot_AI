@@ -3,15 +3,18 @@ import openai
 import requests
 from flask import Flask, request, jsonify, render_template
 import json
-from PyPDF2 import PdfReader
+from pypdf import PdfReader
 import pdfplumber
 from bs4 import BeautifulSoup
 from lib.config import Config
 from lib.db_models import db, store_data, query_data, create_tables
 from lib.search import simple_search
+import traceback
+
 
 app = Flask(__name__)
 app.config.from_object(Config)
+app.config['DEBUG'] = True
 
 # Database configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///chatbot_db'
@@ -51,6 +54,14 @@ def handle_query():
         return jsonify({'error': str(e)}), 500
 
 
+@app.errorhandler(500)
+def handle_500_error(e):
+    error_trace = traceback.format_exc()
+    # Log the trace to console or a file
+    print(error_trace)
+    # Optionally, return a custom error message to the client
+    return "Internal Server Error", 500
+
 
 
 @app.route('/test_error')
@@ -59,7 +70,7 @@ def test_error():
 
 if __name__ == '__main__':
     initialize_app()
-    app.run(debug=False, port=5001)
+    app.run(debug=True, port=5001)
 
 
 

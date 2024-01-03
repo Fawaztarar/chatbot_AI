@@ -1,19 +1,19 @@
 # test_models.py
 import pytest
-from lib.db_models import create_app, db
+from lib.db_models import db
 from lib.db_models import ExtractedData
 from lib.db_models import store_data, query_data
-from chatgpt import create_app
+from chatgpt import *
 
 
-@pytest.fixture
-def test_app():
-    app = create_app('testing')
-    with app.app_context():
-        db.create_all()
-        yield app
-        db.session.remove()
-        db.drop_all()
+# @pytest.fixture
+# def test_app():
+#     app = create_app('testing')
+#     with app.app_context():
+#         db.create_all()
+#         yield app
+#         db.session.remove()
+#         db.drop_all()
 
 def test_extracted_data_model(test_app):
     with test_app.app_context():
