@@ -30,24 +30,36 @@ def initialize_app():
 def chatbot():
     return render_template('ai_chatbot.html')
 
+
+
+
+
+
 @app.route('/query', methods=['POST'])
 def handle_query():
-    data = request.get_json()
-    query = data['query']
-
     try:
+        # Get the JSON data from the request
+        data = request.get_json()
+        query = data['query']
+
+        # Call OpenAI's Completion API
         response = openai.Completion.create(
             model="text-davinci-003",
             prompt=f"Q: {query}\nA:",
             max_tokens=150
         )
+
+        # Check if a valid response was received
         if response and response.choices:
             answer = response.choices[0].text.strip()
             return jsonify({'response': answer})
         else:
             return jsonify({'response': 'No response from the model'}), 400
+
     except Exception as e:
+        # Return a JSON response with the error message and a 500 status code
         return jsonify({'error': str(e)}), 500
+
     
 
 @app.route('/search', methods=['POST'])
