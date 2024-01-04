@@ -48,19 +48,39 @@ def handle_query():
             return jsonify({'response': 'No response from the model'}), 400
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    
+
+@app.route('/search', methods=['POST'])
+def search():
+    data = request.get_json()
+    query = data['query']
+    try:
+        results = simple_search(query)
+        return jsonify({'response': results})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+
+@app.route('/store', methods=['POST'])
+def store():
+    data = request.get_json()
+    query = data['query']
+    try:
+        store_data(query)
+        return jsonify({'response': 'Data stored successfully'})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
 
 
 
 
 
 
-@app.errorhandler(500)
-def handle_500_error(e):
-    error_trace = traceback.format_exc()
-    # Log the trace to console or a file
-    print(error_trace)
-    # Optionally, return a custom error message to the client
-    return "Internal Server Error", 500
+
+
+
+
 
 
 

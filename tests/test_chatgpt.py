@@ -97,6 +97,88 @@ def test_handle_query_error(client):
 
 
 
+def test_search(client):
+    # Mocking the search function
+    with patch('chatgpt.simple_search') as mock_search:
+        mock_search.return_value = ['Paris', 'London', 'New York']
+
+        # Define a sample query
+        sample_query = {"query": "What is the capital of France?"}
+
+        # Simulate a POST request to the /search route
+        response = client.post('/search', json=sample_query)
+
+        # Check that the response status code is 200 (OK)
+        assert response.status_code == 200
+
+        # Check the content of the response
+        data = response.get_json()
+        assert 'response' in data
+        assert 'Paris' in data['response']  # Adjust based on expected response
+
+
+def test_search_error(client):
+    # Mocking the search function
+    with patch('chatgpt.simple_search') as mock_search:
+        mock_search.side_effect = Exception('Something went wrong')
+
+        # Define a sample query
+        sample_query = {"query": "What is the capital of France?"}
+
+        # Simulate a POST request to the /search route
+        response = client.post('/search', json=sample_query)
+
+        # Check that the response status code is 500 (Internal Server Error)
+        assert response.status_code == 500
+
+        # Check the content of the response
+        data = response.get_json()
+        assert 'error' in data
+        assert 'Something went wrong' in data['error']  # Adjust based on expected response
+
+def test_store(client):
+    # Mocking the store_data function
+    with patch('chatgpt.store_data') as mock_store:
+        mock_store.return_value = None
+
+        # Define a sample query
+        sample_query = {"query": "What is the capital of France?"}
+
+        # Simulate a POST request to the /store route
+        response = client.post('/store', json=sample_query)
+
+        # Check that the response status code is 200 (OK)
+        assert response.status_code == 200
+
+        # Check the content of the response
+        data = response.get_json()
+        assert 'response' in data
+        assert 'stored' in data['response']  # Adjust based on expected response
+
+
+def test_store_error(client):
+    # Mocking the store_data function
+    with patch('chatgpt.store_data') as mock_store:
+        mock_store.side_effect = Exception('Something went wrong')
+
+        # Define a sample query
+        sample_query = {"query": "What is the capital of France?"}
+
+        # Simulate a POST request to the /store route
+        response = client.post('/store', json=sample_query)
+
+        # Check that the response status code is 500 (Internal Server Error)
+        assert response.status_code == 500
+
+        # Check the content of the response
+        data = response.get_json()
+        assert 'error' in data
+        assert 'Something went wrong' in data['error']  # Adjust based on expected response
+
+    
+
+
+
 
 
 
