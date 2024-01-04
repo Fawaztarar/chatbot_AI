@@ -8,8 +8,19 @@ chatbot data extraction from makers.tech
 
 ## update Constants
 # Replace with your own OpenAI API Key https://platform.openai.com/account/api-keys
-# and rename this file to constants.py.
+# and edit this file into constants.py.
 #APIKEY =  "sk-<your key here>"
+
+or save in evoirnment variable
+
+export APIKEY="your key here"
+
+to verify:
+echo $APIKEY 
+
+
+
+
 
 
 

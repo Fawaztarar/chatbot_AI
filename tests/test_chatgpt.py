@@ -5,6 +5,7 @@
 from flask.testing import FlaskClient
 import pytest
 from chatgpt import app, db
+from unittest.mock import patch
 
 
 import json
@@ -26,13 +27,13 @@ def test_chatbot_route(client: FlaskClient):
     assert 'Assistant' in response.get_data(as_text=True)
 
 
-from unittest.mock import patch
+
 
 
 
 def test_handle_query(client):
     # Define a sample query
-    sample_query = {"query": "What is the capital of France?"}
+    sample_query = {"query": "What is the fee for makers bootcamp?"}
 
     # Simulate a POST request to the /query route
     response = client.post('/query', json=sample_query)

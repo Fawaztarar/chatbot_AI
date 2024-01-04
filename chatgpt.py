@@ -1,3 +1,4 @@
+# chatgpt.py is the main file for the chatbot. It contains the routes for the chatbot.
 import os
 import openai
 import requests
