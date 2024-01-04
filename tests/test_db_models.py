@@ -1,8 +1,6 @@
 # test_models.py
 import pytest
-from lib.db_models import db
 from lib.db_models import ExtractedData
-from lib.db_models import store_data, query_data, create_tables
 from chatgpt import *
 
 

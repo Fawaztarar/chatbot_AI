@@ -5,7 +5,6 @@ from flask import Flask, request, jsonify, render_template
 import json
 from pypdf import PdfReader
 import pdfplumber
-from bs4 import BeautifulSoup
 from lib.config import Config
 from lib.db_models import db, store_data, query_data, create_tables
 from lib.search import simple_search
