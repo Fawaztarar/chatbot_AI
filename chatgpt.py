@@ -30,9 +30,6 @@ def initialize_app():
 def chatbot():
     return render_template('ai_chatbot.html')
 
-
-
-
 @app.route('/query', methods=['POST'])
 def handle_query():
     data = request.get_json()
@@ -44,13 +41,17 @@ def handle_query():
             prompt=f"Q: {query}\nA:",
             max_tokens=150
         )
-        if response:
-            answer = response.choices[0].text.strip() if response.choices else 'No response'
+        if response and response.choices:
+            answer = response.choices[0].text.strip()
             return jsonify({'response': answer})
         else:
             return jsonify({'response': 'No response from the model'}), 400
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+
+
+
 
 
 @app.errorhandler(500)
