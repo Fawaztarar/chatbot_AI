@@ -29,12 +29,17 @@ def test_handle_query(client):
 
 
 
+# @app.route('/test_error')
+# def test_error():
+#     raise Exception('Test exception')
 
-# def test_handle_query_no_response(client):
-#     test_query = {"query": ""}
-#     response = client.post('/query', json=test_query)
-#     assert response.status_code == 400
 
-# def test_test_error_route(client):
+
+def test_handle_query_no_response(client):
+    test_query = {"query": ""}
+    response = client.post('/query', json=test_query)
+    assert response.status_code == 400
+
+# def test_error_route(client):
 #     response = client.get('/test_error')
 #     assert response.status_code == 500

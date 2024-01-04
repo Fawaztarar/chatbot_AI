@@ -1,3 +1,6 @@
+# db_models.py
+# Description: This file contains the SQLAlchemy models for the database.
+
 from flask_sqlalchemy import SQLAlchemy
 
 # Initialize the SQLAlchemy object without binding it to a specific Flask application

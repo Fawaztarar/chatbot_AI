@@ -63,9 +63,6 @@ def handle_500_error(e):
 
 
 
-@app.route('/test_error')
-def test_error():
-    raise Exception('Test exception')
 
 if __name__ == '__main__':
     initialize_app()
